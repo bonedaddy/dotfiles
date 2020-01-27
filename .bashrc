@@ -116,5 +116,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=$PATH:/usr/local/go/bin:/home/solidity/bin:/home/solidity/.npm_modules/bin:/home/solidity/go/bin
+export PATH=$PATH:/usr/local/go/bin:/home/solidity/bin:/home/solidity/.npm_modules/bin:/home/solidity/go/bin:/snap/bin
 export GOPATH=$HOME/go
