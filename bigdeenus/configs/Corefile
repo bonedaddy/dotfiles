@@ -1,0 +1,15 @@
+.:53 {
+	ens {
+		# REPLACE WITH AN ENDPOINT YOU CNA ACCESS
+		# connection /home/ethereum/.ethereum/geth.ipc
+		ethlinknameservers ns1.ethdns.xyz ns2.ethdns.xyz
+		ipfsgatewaya gateway.temporal.cloud
+	}
+	bufsize 1232
+    log
+	errors
+	whoami
+	health
+    forward . 127.0.0.1:53000 
+    cache 3600
+}
