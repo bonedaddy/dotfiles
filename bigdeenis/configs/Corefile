@@ -1,0 +1,9 @@
+.:53 {
+	bufsize 1232
+    log
+	errors
+	whoami
+	health
+    forward . 127.0.0.1:53000 
+    cache 3600
+}

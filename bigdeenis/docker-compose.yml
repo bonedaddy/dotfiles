@@ -1,0 +1,16 @@
+version: "3.5"
+services: 
+    dns:
+        image: rtradetech/boxit-coredns:latest
+        restart: always
+        network_mode: "host"
+        volumes:
+            - ./configs/Corefile:/coredns/Corefile
+    stubby:
+        image: mvance/stubby:latest
+        restart: always
+        network_mode: "host"
+        volumes:
+            - ./configs/stubby.yml:/opt/stubby/etc/stubby/stubby.yml
+
+            
