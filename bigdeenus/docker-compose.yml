@@ -2,26 +2,13 @@ version: "3.5"
 services: 
     dns:
         image: rtradetech/coredns-ens:latest
-        restart: always
-        ports:
-            - target: 53
-              published: 5356
-              protocol: tcp
-            - target: 53
-              published: 5356
-              protocol: udp
+        network_mode: "host"
         volumes:
             - ./configs/Corefile:/coredns/Corefile
     stubby:
         image: mvance/stubby:latest
         restart: always
-        ports:
-            - target: 53000
-              published: 53001
-              protocol: tcp
-            - target: 53000
-              published: 53001
-              protocol: udp
+        pnetwork_mode: "host"
         volumes:
             - ./configs/stubby.yml:/opt/stubby/etc/stubby/stubby.yml
 
