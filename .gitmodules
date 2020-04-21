@@ -1,0 +1,3 @@
+[submodule "rpi-utils"]
+	path = rpi-utils
+	url = https://github.com/bonedaddy/rpi-utils.git
