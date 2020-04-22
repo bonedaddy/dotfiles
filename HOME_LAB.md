@@ -15,4 +15,7 @@ This is an overview of my home lab, which unfortunately is only partially setup 
 
 # Full Setup
 
-Same as partial setup except it is scaled up to actual servers instead of RPis
+* 2x rack servers running ESXi that I deploy the aforementioned software currently running on Raspberry Pi's into server environments
+* 1x tower server running openmediavault which acts as a media server and generalized NAS
+* 1x Raspberry Pi running RasPlex connected to a TV
+* pfSense firewall using netgate hardware
