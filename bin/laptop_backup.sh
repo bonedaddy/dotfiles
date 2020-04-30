@@ -6,7 +6,7 @@ BACKUP_DIR="$1"
 ROOT_DIR="/home/$(whoami)"
 
 # general backup that ignores hidden directories and node_modules
-rsync -avz --exclude "node_module" --exclude ".*" "$ROOT_DIR" "$BACKUP_DIR"
+rsync -avz --exclude "*node_module*" --exclude ".*" "$ROOT_DIR" "$BACKUP_DIR"
 
 # backup important hidden directories and files
 rsync -avz "$ROOT_DIR/.config" "$ROOT_DIR/.ssh" "$ROOT_DIR/.gitconfig" "$ROOT_DIR/.local" "$BACKUP_DIR"
