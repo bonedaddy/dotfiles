@@ -5,3 +5,8 @@ with bass:
 $> omf install bass
 $> bash export SOMEVAR=SOMEVAL
 ```
+
+with wildcards:
+```shell
+$> bass export "GOPRIVATE=github.com/someuser/*"
+```
