@@ -1,3 +1,8 @@
 # trilium
 
-I don't want to use a trilium docker image compiled by a third-party so this is basically a copy&paste of https://gitea.e9g.rocks/howard/trilium-daily-build
+A docker image for use with trilium. Unfortunately it is quite large due to the node modules needed by trilium itself, and is around 602MB
+
+# usage
+
+* To build run `make build` 
+* To start run docker-compose up -d
