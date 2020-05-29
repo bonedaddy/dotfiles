@@ -1,6 +1,10 @@
 .PHONY: build
 build:
-	docker build -t postables/trilium:latest .
+	docker build -t postables/trilium:latest -f Dockerfile .
+
+.PHONY: build-arm32v7
+build-arm32v7:
+	docker build -t postables/trilium-arm32v7:latest -f arm32v7.Dockerfile .
 
 # you'll want to change the data directory to whatever is suitable
 .PHONY: run-compose
