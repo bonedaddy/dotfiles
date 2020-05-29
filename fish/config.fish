@@ -3,3 +3,4 @@ set -x GOPATH $HOME/go
 set -x GOPRIVATE "github.com/RTradeLtd/*"
 set -x CODE_DIR "/media/solidity/DATA/Code"
 set -x EXT_DIR  "/media/solidity/DATA"
+set -x TRILIUM_DATA_DIR "/media/solidity/DATA/trilium"

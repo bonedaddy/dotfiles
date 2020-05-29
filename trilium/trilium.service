@@ -1,0 +1,15 @@
+[Unit]
+Description=trilium service
+After=network.target
+
+[Service]
+User=solidity
+Group=solidity
+Type=simple
+LimitNOFILE=65535
+ExecStart=/media/solidity/DATA/trilium_start.sh
+Environment="TRILIUM_DATA_DIR=/media/solidity/DATA/trilium"
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
