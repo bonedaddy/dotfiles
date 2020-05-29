@@ -1,0 +1,9 @@
+version: "3.5"
+services:
+    trilium:
+        image: postables/trilium:latest
+        restart: on-failure
+        ports:
+            - 8080:8080
+        volumes:
+            - ${DATADIR}:/trildata
