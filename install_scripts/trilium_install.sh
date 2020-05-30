@@ -32,7 +32,13 @@ elif [[ "$INSTALL_MODE" == "server" ]]; then
 #	rm -rf trilium-linux-x64-server
 	rm trilium-server.tar
 	rm trilium-server.tar.xz 
+elif [[ "$INSTAL_MODE"  == "manual" ]]; then
+	# install deps
+	sudo apt install libpng16-16 libpng-dev pkg-config autoconf libtool build-essential nasm libx11-dev libxkbfile-dev -y
+	git clone https://github.com/zadam/trilium
+	cd trilium && git checkout "v${INSTALL_VERSION}"
+	npm install
 else
-        echo "[ERROR] invalid mode, must be desktop or server"
+        echo "[ERROR] invalid mode, must be desktop, server, manual"
         exit 1
 fi
