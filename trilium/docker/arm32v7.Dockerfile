@@ -19,10 +19,10 @@ RUN cd /trilium && git checkout v0.42.3
 RUN cd /trilium && \
     npm install sqlite3 --build-from-source --sqlite=/usr && \
     npm install
-FROM arm32v7/node:10.20.1-alpine3.10
-RUN mkdir /trildata
-COPY --from=build-env /trilium/ /trilium/
 RUN rm -rf /trilium/node_modules
+FROM arm32v7/node:10.20.1-alpine3.10
+RUN mkdir /trildata && mkdir /trilium
+COPY --from=build-env /trilium/src /trilium/src
 COPY entrypoint.sh /bin/entrypoint.sh
 EXPOSE 8080/tcp
 ENTRYPOINT [ "/bin/entrypoint.sh" ]
