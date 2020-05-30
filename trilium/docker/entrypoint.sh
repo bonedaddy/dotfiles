@@ -1,3 +1,2 @@
-#! /bin/ash
-export TRILIUM_DATA_DIR=/trildata
+#! /bin/bash
 cd /trilium && node src/www

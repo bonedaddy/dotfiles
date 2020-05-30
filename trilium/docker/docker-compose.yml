@@ -7,3 +7,5 @@ services:
             - 8080:8080
         volumes:
             - ${DATADIR}:/trildata
+        environment:
+            - TRILIUM_DATA_DIR=/trildata
