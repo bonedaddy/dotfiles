@@ -8,10 +8,13 @@ MODE="$1"
 URL=""
 
 if [[ "$MODE" == "armv7" ]]; then
+    echo "[INFO] downloading armv7 binaries"
     URL="$ARM_V7_URL"
 elif [[ "$MODE" == "arm64" ]]; then
+    echo "[INFO] downloading arm64 binaries"
     URL="$ARM_64_URL"
 elif [[ "$MODE" == "amd64" ]]; then
+    echo "[INFO] downloading adm64 binaries"
     URL="$LINUX_64_URL"
 else
     echo "[ERROR] invalid mode, must be one of: armv7, arm64, amd64"
@@ -19,7 +22,7 @@ else
 fi
 
 # do amd64 stuff
-wget -O nebula.tar.gz "$LINUX_64_URL"
+wget -O nebula.tar.gz "$URL"
 tar zxvf nebula.tar.gz
 sudo cp nebula /usr/bin
 sudo cp nebula-cert /usr/bin
