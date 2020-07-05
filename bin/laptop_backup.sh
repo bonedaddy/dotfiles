@@ -12,4 +12,4 @@ rsync -avz --exclude "*node_module*" --exclude ".*" --exclude "Code" --exclude "
 rsync -avz "$ROOT_DIR/.config" "$ROOT_DIR/.ssh" "$ROOT_DIR/.gitconfig" "$ROOT_DIR/.gnupg" "$ROOT_DIR/.msf4" "$BACKUP_DIR"
 
 # backup important system files
-rsync -avz "/etc/stubby" /etc/dnsmasq.conf "/media/solidity/DATA/trilium" "$BACKUP_DIR"
+rsync -avz "/etc/stubby" /etc/dnsmasq.conf "/media/solidity/DATA/trilium" "/media/solidity/DATA/website-archives" /etc/rkhunter.conf /etc/default/arpon /etc/sysctl.conf /etc/host.conf "$BACKUP_DIR"
