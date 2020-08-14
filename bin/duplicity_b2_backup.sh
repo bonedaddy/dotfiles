@@ -42,21 +42,21 @@ export SIGN_PASSPHRASE="$PASSWORD"
 
 # Remove files older than 90 days
 duplicity \
- --progress \
+ --progress --asynchronous-upload \
  --sign-key $SGN_KEY --encrypt-key $ENC_KEY \
  remove-older-than 90D --force \
  b2://${B2_ACCOUNT}:${B2_KEY}@${B2_BUCKET}/${B2_DIR}
 
 # Perform the backup, make a full backup if it's been over 30 days
 duplicity \
- --progress \
+ --progress --asynchronous-upload \
  --sign-key $SGN_KEY --encrypt-key $ENC_KEY \
  --full-if-older-than 30D \
  ${LOCAL_DIR} b2://${B2_ACCOUNT}:${B2_KEY}@${B2_BUCKET}/${B2_DIR}
 
 # Cleanup failures
 duplicity \
- --progress \
+ --progress --asynchronous-upload \
  cleanup --force \
  --sign-key $SGN_KEY --encrypt-key $ENC_KEY \
  b2://${B2_ACCOUNT}:${B2_KEY}@${B2_BUCKET}/${B2_DIR}
