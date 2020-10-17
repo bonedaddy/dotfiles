@@ -1,39 +1,52 @@
 version: "3.5"
-services: 
-    dns:
-        image: rtradetech/coredns-ens:latest
-        network_mode: "host"
-        volumes:
-            - ./configs/Corefile:/coredns/Corefile
-    stubby:
-        image: mvance/stubby:latest
-        restart: always
-        pnetwork_mode: "host"
-        volumes:
-            - ./configs/stubby.yml:/opt/stubby/etc/stubby/stubby.yml
-    # TODO(bonedaddy): enable this
-    # pihole: # TODO
-    #    container_name: pihole
-    #    image: pihole/pihole:latest
-    #    ports:
-    #    - "53:53/tcp"
-    #    - "53:53/udp"
-    #    - "67:67/udp"
-    #    - "80:80/tcp"
-    #    - "443:443/tcp"
-    #    environment:
-    #    TZ: 'America/Chicago'
-    #    # WEBPASSWORD: 'set a secure password here or it will be random'
-    #    # Volumes store your data between container upgrades
-    #    volumes:
-    #    - './etc-pihole/:/etc/pihole/'
-    #    - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-    #    dns:
-    #    - 127.0.0.1
-    #    - 1.1.1.1
-    #    # Recommended but not required (DHCP needs NET_ADMIN)
-    #    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    #    cap_add:
-    #    - NET_ADMIN
-    #    restart: unless-stopped
+services:
 
+    unbound:
+        image: klutchell/unbound
+        ports:
+            - "5056:5053/tcp"
+            - "5056:5053/udp"
+        volumes:
+            - /ext-hdd/unbound/unbound.conf:/opt/unbound/etc/unbound/unbound.conf
+        networks:
+            pihole_net:
+                ipv4_address: 10.0.0.2
+
+    pihole:
+        image: pihole/pihole
+        depends_on: 
+            - unbound
+        links:
+            - unbound
+        ports:
+            - "53:53/tcp"
+            - "53:53/udp"
+            - "5354:53/tcp"
+            - "5354:53/udp"
+            - "67:67/udp"
+            - "80:80/tcp"
+            - "443:443/tcp"
+        environment:
+          TZ: CHANGE_TO_YOUR_TIMEZONE
+          WEBPASSWORD: CHANGE_TO_YOUR_PASS
+          DNSSEC: "true"
+          ServerIP: CHANGE_TO_LAN_HOST_OR_IP
+          DNS1: 10.0.0.2#5053
+          DNS2: "no"
+          IPv6: "no"
+          PIHOLE_BASE: /opt/pihole-storage
+        volumes:
+            - /ext-hdd/pihole-base:/opt/pihole-storage
+            - /ext-hdd/pihole-etc/:/etc/pihole
+            - /ext-hdd/pihole-dnsmasq.d/:/etc/dnsmasq.d/
+        restart: unless-stopped
+        networks:
+            pihole_net:
+                ipv4_address: 10.0.0.3
+
+networks:
+    pihole_net:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 10.0.0.0/29

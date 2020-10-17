@@ -15,5 +15,4 @@ The `trilum` directory contains a script and systemd service file to run the ser
 
 ## bigdeenus
 
-[Balling DNS setup to run in your local network that pimps out your DNS security and privacy](./BIGDEENUS.md)
-
+[PiHole and Unbound docker compose file that provides network level adblocking, DNSSEC, DoT, EDNS enhancements, and a caching recursive resolver](./bigdeenus/README.md)
