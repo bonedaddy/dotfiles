@@ -1,49 +1,37 @@
 version: "3.5"
 services:
-
     unbound:
         image: klutchell/unbound
-        ports:
-            - "5056:5053/tcp"
-            - "5056:5053/udp"
         volumes:
             - /ext-hdd/unbound/unbound.conf:/opt/unbound/etc/unbound/unbound.conf
+        restart: unless-stopped
         networks:
             pihole_net:
                 ipv4_address: 10.0.0.2
-
     pihole:
         image: pihole/pihole
-        depends_on: 
-            - unbound
-        links:
-            - unbound
+        dns: 127.0.0.1
         ports:
             - "53:53/tcp"
             - "53:53/udp"
-            - "5354:53/tcp"
-            - "5354:53/udp"
-            - "67:67/udp"
             - "80:80/tcp"
-            - "443:443/tcp"
+        depends_on: 
+            - unbound
         environment:
-          TZ: CHANGE_TO_YOUR_TIMEZONE
-          WEBPASSWORD: CHANGE_TO_YOUR_PASS
+          TZ: 'America/Vancouver'
+          WEBPASSWORD: passsword
           DNSSEC: "true"
-          ServerIP: CHANGE_TO_LAN_HOST_OR_IP
+          ServerIP: 0.0.0.0
           DNS1: 10.0.0.2#5053
           DNS2: "no"
-          IPv6: "no"
-          PIHOLE_BASE: /opt/pihole-storage
+          IPv6: "yes"
         volumes:
-            - /ext-hdd/pihole-base:/opt/pihole-storage
             - /ext-hdd/pihole-etc/:/etc/pihole
             - /ext-hdd/pihole-dnsmasq.d/:/etc/dnsmasq.d/
         restart: unless-stopped
         networks:
             pihole_net:
                 ipv4_address: 10.0.0.3
-
 networks:
     pihole_net:
         driver: bridge
